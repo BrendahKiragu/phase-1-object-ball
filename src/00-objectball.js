@@ -1,3 +1,4 @@
+//gameObject creates info abbout a basketball game
 function gameObject(){
     let game = {
 
@@ -121,4 +122,120 @@ function gameObject(){
     return(game);
 }
 
+//creates a variable that holds home team(Brooklyn Nets) players info
+let homeTeamPlayers = gameObject()["home"]["players"];
+
+//creates a variable that holds away team(Charlotte Hornets) players info
+let awayTeamPlayers = gameObject()["away"]["players"];
+
+//this functions accesses details of the gameObject key:value 
+function homeTeamName(){
+    let object = gameObject();
+    return object["home"]["teamName"];
+}
+
+ //returns the number of points scored by a player
+ // console.log("numPointsScored: ", numPointsScored("Jason Terry"))
+function numPointsScored(playerName){
+    let pointsScored = 0;
+    for(let currentName in homeTeamPlayers){
+
+        if (currentName === playerName){
+            return homeTeamPlayers[currentName].points;
+        }
+    }
+    for(let currentName in awayTeamPlayers){
+        if (currentName === playerName){
+            return awayTeamPlayers[currentName].points;
+        }
+    }
+}
+
+//console.log("shoeSize: ", shoeSize("Jason Terry"))
+function shoeSize(playerName){
+    let pointsScored = 0;
+    for(let currentName in homeTeamPlayers){
+
+        if (currentName === playerName){
+            return homeTeamPlayers[currentName].shoe;
+        }
+    }
+    for(let currentName in awayTeamPlayers){
+        if (currentName === playerName){
+            return awayTeamPlayers[currentName].shoe;
+        }
+    }
+}
+
+//console.log("teamColors: ", teamColors("Brooklyn Nets"))
+function teamColors(targetTeam){
+    let game = gameObject();
+    for(let team in game){
+
+        if(targetTeam === game[team].teamName){
+            return game[team].colors;
+        }
+    }
+}
+
+//console.log("teamNames: ", teamNames())
+function teamNames(){
+    let game = gameObject()
+    let teamNameArray = []
+    for(let team in gameObject()){
+        teamNameArray.push(game[team]["teamName"])
+    }
+    return teamNameArray;
+}
+
+//console.log("playerNumbers: ", playerNumbers("Brooklyn Nets"))
+function playerNumbers(targetTeam){
+    let game = gameObject();
+    let playerNumbersArray = [];
+
+    for(let team in game){
+        if(targetTeam === game[team].teamName){
+
+            for(let player in game[team].players){
+                console.log(player)
+                playerNumbersArray.push(game[team].players[player].number)
+            }
+        }
+    }
+    return playerNumbersArray;
+}
+
+//console.log(playerStats("Jason Terry"))
+function playerStats(playerName){
+    let game = gameObject();
+    let playerStatsObj = {};
+    for(let team in game){
+            for(let player in game[team].players){
+                if(player === playerName){
+                    playerStatsObj = {...game[team].players[player]}
+                }
+        }
+    }
+    return playerStatsObj;
+}
+
+//console.log("bigShoeRebounds: ", bigShoeRebounds())
+function bigShoeRebounds(){
+    let game = gameObject();
+    let biggestShoe = 0;
+    let biggestShoePlayerRebounds = 0;
+
+    for(let team in game){
+        for(let player in game[team].players){
+            if(game[team].players[player].shoe > biggestShoe){
+                biggestShoe = game[team].players[player].shoe;
+                biggestShoePlayerRebounds = game[team].players[player].rebounds;
+                biggestShoePlayerName = player
+            }
+        }
+    }
+    console.log(biggestShoePlayerName)
+    console.log("Shoe size: ", biggestShoe)
+    return biggestShoePlayerRebounds;
+}
 
