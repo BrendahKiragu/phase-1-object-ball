@@ -1,3 +1,4 @@
+//creates a function containing stats of players from away and home team
 function gameObject(){
     return {
         home: {
